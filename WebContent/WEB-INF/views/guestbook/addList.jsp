@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.javaex.vo.GuestVo" %>
-<%
-	List<GuestVo> gList = (List<GuestVo>)request.getAttribute("guestList");
-	gList.toString();
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,20 +14,11 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-		</div>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header -->
-
-		<div id="nav">
-			<jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
-			<div class="clear"></div>
-		</div>
+		<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 		<!-- //nav -->
-
-		<div id="aside">
-			<jsp:include page="/WEB-INF/views/include/guestAside.jsp"></jsp:include>
-		</div>
+		<c:import url="/WEB-INF/views/include/aside.jsp"></c:import>
 		<!-- //aside -->
 
 		<div id="content">
@@ -78,9 +64,9 @@
 					<!-- //guestWrite -->
 					<input type="hidden" name="action" value="add">
 					
-				</form>	
-				<%for(GuestVo vo: gList) { %>
-				<table class="guestRead">
+				</form>
+				<c:forEach items="${requestScope.guestList }" var="vo">
+					<table class="guestRead">
 					<colgroup>
 						<col style="width: 10%;">
 						<col style="width: 40%;">
@@ -88,16 +74,16 @@
 						<col style="width: 10%;">
 					</colgroup>
 					<tr>
-						<td><%=vo.getNo() %></td>
-						<td><%=vo.getName() %></td>
-						<td><%=vo.getDate() %></td>
-						<td><a href="/ms2/gb?action=deleteForm&no=<%=vo.getNo() %>">[삭제]</a></td>
+						<td>${vo.no }</td>
+						<td>${vo.name }</td>
+						<td>${vo.date }</td>
+						<td><a href="/ms2/gb?action=deleteForm&no=${vo.no }">[삭제]</a></td>
 					</tr>
 					<tr>
-						<td colspan=4 class="text-left"><%=vo.getContent() %></td>
+						<td colspan=4 class="text-left">${vo.content }</td>
 					</tr>
-				</table>
-				<%} %>
+					</table>
+				</c:forEach>
 				<!-- //guestRead -->
 				
 			</div>
@@ -106,7 +92,7 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

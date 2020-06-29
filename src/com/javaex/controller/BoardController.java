@@ -1,0 +1,51 @@
+package com.javaex.controller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.javaex.dao.BoardDao;
+import com.javaex.util.WebUtil;
+import com.javaex.vo.BoardVo;
+
+@WebServlet("/board")
+public class BoardController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String action = request.getParameter("action");
+		BoardDao boardDao = new BoardDao();
+		
+		if("list".equals(action)) {
+			System.out.println("list");
+			List<BoardVo> bList = boardDao.getBoardList();
+			
+			request.setAttribute("boardList", bList);
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
+		} else if("modifyForm".equals(action)) {
+			System.out.println("modifyForm");
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
+		} else if("writeForm".equals(action)) {
+			System.out.println("writeForm");
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
+		} else if("read".equals(action)) {
+			System.out.println("read");
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/board/read.jsp");
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

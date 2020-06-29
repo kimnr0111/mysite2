@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	int guestNo = Integer.parseInt(request.getParameter("no"));
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,20 +14,11 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-		</div>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header -->
-
-		<div id="nav">
-			<jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
-			<div class="clear"></div>
-		</div>
+		<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 		<!-- //nav -->
-
-		<div id="aside">
-			<jsp:include page="/WEB-INF/views/include/guestAside.jsp"></jsp:include>
-		</div>
+		<c:import url="/WEB-INF/views/include/aside.jsp"></c:import>
 		<!-- //aside -->
 
 		<div id="content">
@@ -64,7 +53,7 @@
 						</tr>
 					</table>
 					<input type='hidden' name="action" value="delete">
-					<input type='hidden' name="no" value="<%=guestNo %>">
+					<input type='hidden' name="no" value="${requestScope.no }">
 				</form>
 				
 			</div>
@@ -73,7 +62,7 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>
