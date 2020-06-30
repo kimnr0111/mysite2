@@ -67,9 +67,11 @@
 								<td>${vo.name }</td>
 								<td>${vo.hit }</td>
 								<td>${vo.date }</td>
-								<c:if test="${vo.userNo == sessionScope.authUser.no }">
-									<td><a href="/ms2/board?action=delete&no=${vo.no }">[삭제]</a></td>
-								</c:if>
+								<td>
+									<c:if test="${vo.userNo == sessionScope.authUser.no }">
+										<a href="/ms2/board?action=delete&no=${vo.no }">[삭제]</a>
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 						</tbody>
