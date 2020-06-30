@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,46 +15,13 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<h1><a href="">MySite</a></h1>
-			
-			
-			<!--  -->
-				<!-- 로그인실패시, 로그인전 -->
-				<ul>
-					<li><a href="">로그인</a></li>
-					<li><a href="">회원가입</a></li>
-				</ul>
-				
-			<!-- 로그인성공했을때 -->	
-			<!-- 
-				<ul>
-					<li>황일영 님 안녕하세요^^</li>
-					<li><a href="">로그아웃</a></li>
-					<li><a href="">회원정보수정</a></li>
-				</ul>
-			-->
-		</div>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header -->
 		
-		<div id="nav">
-			<ul>
-				<li><a href="">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
+		<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
 		<!-- //nav -->
 
-		<div id="aside">
-			<h2>게시판</h2>
-			<ul>
-				<li><a href="">일반게시판</a></li>
-				<li><a href="">댓글게시판</a></li>
-			</ul>
-		</div>
+		<c:import url="/WEB-INF/views/include/boardAside.jsp"></c:import>
 		<!-- //aside -->
 
 
@@ -74,19 +42,20 @@
 
 			<div id="board">
 				<div id="writeForm">
-					<form action="#" method="get">
+					<form action="/ms2/board" method="get">
 						<!-- 제목 -->
 						<div class="form-group">
 							<label class="form-text" for="txt-title">제목</label>
-							<input type="text" id="txt-title" name="" value="" placeholder="제목을 입력해 주세요">
+							<input type="text" id="txt-title" name="title" value="" placeholder="제목을 입력해 주세요">
 						</div>
 					
 						<!-- 내용 -->
 						<div class="form-group">
-							<textarea id="txt-content"></textarea>
+							<textarea id="txt-content" name="content"></textarea>
 						</div>
 						
-						<a id="btn_cancel" href="">취소</a>
+						<input type="hidden" name="action" value="write">
+						<a id="btn_cancel" href="/ms2/board?action=list">취소</a>
 						<button id="btn_add" type="submit" >등록</button>
 						
 					</form>
@@ -99,9 +68,7 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->

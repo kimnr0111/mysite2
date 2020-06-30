@@ -78,7 +78,7 @@ public class BoardDao {
 		close();
 	}
 	
-	public void boardDelete(BoardVo boardVo) {
+	public void boardDelete(int no) {
 		int count = 0;
 		getConnection();
 		
@@ -86,11 +86,9 @@ public class BoardDao {
 			String query = "";
 			query += " delete from board ";
 			query += " where no = ? ";
-			query += " and user_no = ? ";
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1, boardVo.getNo());
-			pstmt.setInt(2, boardVo.getUserNo());
+			pstmt.setInt(1, no);
 			
 			count = pstmt.executeUpdate();
 			
@@ -170,6 +168,43 @@ public class BoardDao {
 		close();
 		
 		return boardList;
+		
+	}
+	
+	public BoardVo getBoard(int no) {
+		BoardVo vo = null;
+		getConnection();
+		
+		try {
+			String query = "";
+			query += "select ur.name, bo.hit, bo.reg_date, bo.title, bo.content, bo.user_no ";
+			query += "from board bo, users ur ";
+			query += "where bo.user_no = ur.no ";
+			query += "and bo.no = ? ";
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String name = rs.getString("name");
+				int hit = rs.getInt("hit");
+				String regDate = rs.getString("reg_date");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				int userNo = rs.getInt("user_no");
+				
+				vo = new BoardVo(no, title, content, hit, regDate, userNo, name);
+
+			}
+			System.out.println(vo.toString());
+			
+		} catch(SQLException e) {
+			System.out.println("error:" + e);
+		}
+		
+		return vo;
 		
 	}
 

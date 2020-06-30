@@ -37,7 +37,11 @@ public class UserTest {
 		boardDao.boardUpdate(boardVo);
 		*/
 		
+		/*
 		boardDao.getBoardList();
+		*/
+		
+		boardDao.getBoard(1);
 
 	}
 

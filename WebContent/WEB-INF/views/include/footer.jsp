@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
     
 		<div id="footer">
-			Copyright ⓒ 2012 황일영. All right reserved
+			Copyright ⓒ 2020 김누리. All right reserved
 		</div>

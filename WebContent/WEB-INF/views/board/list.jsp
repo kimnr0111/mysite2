@@ -63,11 +63,13 @@
 						<c:forEach items="${requestScope.boardList }" var="vo" varStatus="status">
 							<tr>
 								<td>${vo.no }</td>
-								<td class="text-left"><a href="#">${vo.content }</a></td>
+								<td class="text-left"><a href="/ms2/board?action=read&no=${vo.no }">${vo.title }</a></td>
 								<td>${vo.name }</td>
 								<td>${vo.hit }</td>
 								<td>${vo.date }</td>
-								<td><a href="">[삭제]</a></td>
+								<c:if test="${vo.userNo == sessionScope.authUser.no }">
+									<td><a href="/ms2/board?action=delete&no=${vo.no }">[삭제]</a></td>
+								</c:if>
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -92,7 +94,9 @@
 						
 						<div class="clear"></div>
 					</div>
-					<a id="btn_write" href="">글쓰기</a>
+					<c:if test="${sessionScope.authUser != null }">
+						<a id="btn_write" href="/ms2/board?action=writeForm">글쓰기</a>
+					</c:if>
 				
 				</div>
 				<!-- //list -->
