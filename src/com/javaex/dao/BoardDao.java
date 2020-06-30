@@ -203,9 +203,29 @@ public class BoardDao {
 		} catch(SQLException e) {
 			System.out.println("error:" + e);
 		}
-		
+		close();
 		return vo;
 		
+	}
+	
+	public void addHit(int no) {
+		getConnection();
+		
+		try {
+			String query = "";
+			query += "update board ";
+			query += "set hit = hit+1 ";
+			query += "where no = ? ";
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, no);
+			
+			pstmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
 	}
 
 }

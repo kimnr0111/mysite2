@@ -50,6 +50,7 @@ public class BoardController extends HttpServlet {
 			System.out.println("read");
 			
 			int no = Integer.parseInt(request.getParameter("no"));
+			boardDao.addHit(no);
 			BoardVo vo = boardDao.getBoard(no);
 			request.setAttribute("vo", vo);
 			
