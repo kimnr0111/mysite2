@@ -80,7 +80,7 @@
 						<td><a href="/ms2/gb?action=deleteForm&no=${vo.no }">[삭제]</a></td>
 					</tr>
 					<tr>
-						<td colspan=4 class="text-left">${vo.content }</td>
+						<td colspan=4 class="text-left"  style="white-space: pre-line;">${vo.content }</td>
 					</tr>
 					</table>
 				</c:forEach>

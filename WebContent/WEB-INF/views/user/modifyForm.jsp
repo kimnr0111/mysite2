@@ -80,7 +80,7 @@
 						</div>
 
 						<input type="hidden" name="action" value="modify">
-						<input type="hidden" name="no" value="${requestScope.userVo.no }">
+						<input type="text" name="no" value="${sessionScope.authUser.no}">
 						<!-- 버튼영역 -->
 		                <div class="button-area">
 		                    <button type="submit" id="btn-submit">회원정보수정</button>
